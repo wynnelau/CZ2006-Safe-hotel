@@ -1,0 +1,30 @@
+hotels:
+    css: 'div._fe1927d9e:nth-of-type(n+2)'
+    xpath: null
+    multiple: true
+    type: Text
+    children:
+        name:
+            css: div.fde444d7ef
+            xpath: null
+            type: Text
+        image:
+            css: img.e75f1d9859
+            xpath: null
+            type: Image
+        price:
+            css: span.fde444d7ef
+            xpath: null
+            type: Text
+        location:
+            css: 'span span.af1ddfc958:nth-of-type(1)'
+            xpath: null
+            type: Text
+        review:
+            css: div._9c5f726ff.bd528f9ea6
+            xpath: null
+            type: Text
+        url:
+            css: 'div.f0b5ba03dc a._4310f7077'
+            xpath: null
+            type: Link

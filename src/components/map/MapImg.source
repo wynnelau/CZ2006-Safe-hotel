@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <div style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" id="inform"></div>
+    <svg @mouseenter="loadMap" class="map" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" viewBox="0 0 800 518" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round">
+    </svg>
+  </div>
+</template>
+
+<script>
+import calcAggOutput from './calcAggOutput.js'
+export default {
+  name: "MapImg",
+  methods: {
+    loadMap() {
+      for (let region in calcAggOutput["sz"]["aggregatedObj"]) {
+        const pathObj = document.getElementById(region);
+        if (pathObj) {
+          pathObj.onmouseover = function(event) {
+            pathObj.style.cursor = "pointer";
+            const inform = document.getElementById("inform");
+            inform.innerHTML = event.target.parentNode.id + ": " + calcAggOutput["sz"]["aggregatedObj"][event.target.parentNode.id] + " CASES";
+          }
+          pathObj.onmouseout = function() {
+            pathObj.style.cursor = "auto";
+            const inform = document.getElementById("inform");
+            inform.innerHTML = "SINGAPORE MAP";
+          }
+          pathObj.onclick = function(event) {
+            const location = event.target.parentNode.id;
+            const url = "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1DCBkoggI46AdIM1gEaMkBiAEBmAEJuAEXyAEM2AED6AEB-AECiAIBqAIDuALzouSQBsACAdICJDJiMTEwY2VkLWZhYTItNGE0MC1hMjNiLTM4NzYyMDhhMTQ4ZtgCBOACAQ;sid=384c498d2529a1851b6ef193f33c8cc6&ss=";
+            window.open(url + location, '_blank');
+          }
+        }
+        else {
+          alert(region + " Not Found!");
+        }
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+  #inform {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 20px;
+  }
+  .map {
+    margin-top: 40px;
+    width: 70%;
+  }
+</style>
