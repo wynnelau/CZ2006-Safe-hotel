@@ -1,4 +1,3 @@
-import selectorlib
 from selectorlib import Extractor
 import requests 
 from time import sleep
