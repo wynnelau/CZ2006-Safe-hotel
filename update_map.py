@@ -1,5 +1,9 @@
 import requests
 import json
+import os
+
+if not os.path.exists("src/data"):
+    os.mkdir("src/data")
 
 map_data_url = "https://d209m3w127yzkd.cloudfront.net/data/calcAggOutput.js"
 map_data_path = "src/components/map/calcAggOutput.js"

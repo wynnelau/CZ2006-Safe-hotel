@@ -4,6 +4,10 @@ import requests
 from time import sleep
 import csv
 import json
+import os
+
+if not os.path.exists("src/data"):
+    os.mkdir("src/data")
 
 url_data = 'src/assets/urls.txt'
 booking_data = 'src/assets/booking.yml'
