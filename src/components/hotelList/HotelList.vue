@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import hotelList from '@/assets/hoteldata.json'
+import hotelList from '@/data/hotel_data.json'
 import HotelListItem from '@/components/hotelList/HotelListItem'
 import HotelBlock from '@/components/hotelList/HotelBlock'
 export default {

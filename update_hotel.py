@@ -7,8 +7,8 @@ import json
 
 url_data = 'src/assets/urls.txt'
 booking_data = 'src/assets/booking.yml'
-hotel_data_csv = 'src/assets/hoteldata.csv'
-hotel_data_json = 'src/assets/hoteldata.json'
+hotel_data_csv = 'src/data/hotel_data.csv'
+hotel_data_json = 'src/data/hotel_data.json'
 
 # Create an Extractor by reading from the YAML file
 e = Extractor.from_yaml_file(booking_data)
