@@ -1,5 +1,11 @@
 # safe-hotel
 
+## Prerequisite
+```
+npm >= 8.1.2
+python >= 3.6
+```
+
 ## First Time Running
 ```
 pip install -r requirements.txt
