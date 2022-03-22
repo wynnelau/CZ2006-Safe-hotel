@@ -9,33 +9,60 @@
       <el-col :span="6" class="label-container">
         Location
       </el-col>
-      <input type="text" placeholder="Your location">
+      <!-- <input type="text" placeholder="Your location"> -->
+      <select-bar ref="selectBar" v-on:selectedVal="selectedVal" />
     </el-row>
     <el-row :gutter="20" class="filter-row">
       <el-col :span="6" style="display: flex; flex-direction: column;">
         <div class="label-container">Price</div>
         <div class="note">Higher bound</div>
       </el-col>
-      <input type="number" placeholder="Higher bound">
+      <input v-model="highPrice" type="number" placeholder="Higher bound">
     </el-row>
     <el-row :gutter="20" class="filter-row">
       <el-col :span="6" style="display: flex; flex-direction: column;">
         <div class="label-container">Price</div>
         <div class="note">Lower bound</div>
       </el-col>
-      <input type="number" placeholder="Lower bound">
+      <input v-model="lowPrice" type="number" placeholder="Lower bound">
     </el-row>
-    <el-button class="button">Search</el-button>
+    <el-button class="button" @click="search">Search</el-button>
   </el-card>
 </template>
 
 <script>
 import {ElRow, ElCol, ElButton, ElCard} from 'element-plus'
+import SelectBar from '@/components/filterForm/SelectBar'
+
+import { postFilterForm } from '@/network/filter.js'
 
 export default {
   name: "FilterForm",
   components: {
-    ElRow, ElCol, ElButton, ElCard
+    ElRow, ElCol, ElButton, ElCard, SelectBar
+  },
+  data() {
+    return {
+      selected: null,
+      highPrice: null,
+      lowPrice: null
+    }
+  },
+  methods: {
+    search() {
+      postFilterForm({
+        area: this.selected,
+        highPrice: this.highPrice,
+        lowPrice: this.lowPrice
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
+    },
+    selectedVal(childVal) {
+      this.selected = childVal;
+    }
   }
 }
 </script>
