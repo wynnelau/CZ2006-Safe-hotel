@@ -1,2 +1,6 @@
 requests
 selectorlib
+flask_sqlalchemy
+flask_marshmallow
+flask
+flask_cors
