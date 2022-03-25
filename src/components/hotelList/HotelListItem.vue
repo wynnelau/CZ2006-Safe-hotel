@@ -17,6 +17,9 @@
           <img src="@/assets/img/star.svg" alt="" style="width: 1em; height: 1em; margin-right: 5px;">
           <div>{{hotel.review}}</div>
         </div>
+        <div>
+          Risk Level: {{hotel.risk_level}}
+        </div>
       </div>
       <div class="flex-row" style="margin-top: 10px;">
         <div class="price">{{hotel.price}}</div>
@@ -37,7 +40,7 @@ export default {
   },
   data() {
     return {
-      
+
     }
   },
   methods: {
@@ -79,7 +82,7 @@ export default {
 }
 .text {
   text-align: left;
-  
+
 }
 .hotel-name {
   font-weight: bold;

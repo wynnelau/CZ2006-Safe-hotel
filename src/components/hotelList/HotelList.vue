@@ -7,13 +7,13 @@
       <div class="style-button isActive" v-if="!isStyle1">style 2</div>
     </div>
     <div v-if="isStyle1">
-      <div v-for="item in hotelPage1" :key="item.name">
+      <div v-for="item in hotelRecomList" :key="item.name">
         <hotel-list-item :hotel="item">
         </hotel-list-item>
       </div>
     </div>
     <div v-if="!isStyle1">
-      <hotel-block :hotelData="hotelPage1" />
+      <hotel-block :hotelData="hotelRecomList" />
     </div>
   </div>
 </template>
@@ -27,16 +27,22 @@ export default {
     HotelListItem, HotelBlock
   },
   created() {
-    this.hotelList = hotelList;
-    this.hotelPage1 = hotelList.slice(0, 20);
-    for (let item of this.hotelPage1) {
-      item.price = "S$ " + item.price.slice(3);
+    this.hotelRecomList = [];
+    for (let item of hotelList) {
+      if (item.risk_level === "Low") {
+        item.price = "S$ " + item.price.slice(3);
+        this.hotelRecomList.push(item);
+      }
     }
+    // this.hotelPage1 = hotelList.slice(0, 20);
+    // for (let item of this.hotelPage1) {
+    //   item.price = "S$ " + item.price.slice(3);
+    // }
   },
   data() {
     return {
-      hotelList,
-      hotelPage1: null,
+      hotelRecomList: [],
+      // hotelPage1: null,
       isStyle1: true
     }
   },

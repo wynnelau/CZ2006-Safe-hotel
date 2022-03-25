@@ -7,6 +7,9 @@
           <div class="hotel-name">
             {{hotel.name}}
           </div>
+          <div class="risk-level">
+            Risk Level: {{hotel.risk_level}}
+          </div>
           <div class="location">
             {{hotel.location}}
           </div>
@@ -64,15 +67,22 @@ export default {
   font-size: medium;
   font-family: 'Bahnschrift SemiBold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.risk-level {
+  font-size: small;
+  font-family: 'Bahnschrift SemiBold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #91AD70;
+}
 .location {
   margin: 10px 0 5px 0;
   font-size: 0.9em;
-  color: gray;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #535953;
 }
 .rate {
   margin-bottom: 5px;
   font-size: 0.9em;
-  color: gray;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #535953;
 }
 .price {
   font-size: 1.2em;
@@ -82,7 +92,7 @@ export default {
 .book {
   align-self: flex-start;
   font-size: 0.9em;
-  color: rgb(117, 143, 165);
+  color: #535953;
   cursor: pointer;
 }
 </style>
