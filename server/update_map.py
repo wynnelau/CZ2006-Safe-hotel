@@ -1,17 +1,10 @@
 import requests
 import json
 import os
+from server.utils import *
 
 if not os.path.exists("src/data"):
     os.mkdir("src/data")
-
-map_data_url = "https://d209m3w127yzkd.cloudfront.net/data/calcAggOutput.js"
-map_data_path = "src/components/map/calcAggOutput.js"
-map_image_url = "src/assets/img/map_initial.svg"
-map_output_url = "src/data/map.svg"
-json_file_url = "src/data/data.json"
-vue_input_url = "src/components/map/MapImg.source"
-vue_output_url = "src/components/map/MapImg.vue"
 
 def fetch_data():
     session = requests.session()

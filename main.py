@@ -1,5 +1,6 @@
-import update_map
-import update_hotel
+import server.update_map as update_map
+import server.update_hotel as update_hotel
+from server.flask_app import app
 import time
 import threading
 import os
@@ -15,11 +16,16 @@ def periodically_update_data():
             update_map.main()
             update_hotel.main()
 
+def run_flask():
+    app.run(debug=False)
+
 if not os.path.exists("node_modules"):
     os.system("npm install")
 try:
-    thread = threading.Thread(target=periodically_update_data)
-    thread.start()
+    thread1 = threading.Thread(target=periodically_update_data)
+    thread2 = threading.Thread(target=run_flask)
+    thread1.start()
+    thread2.start()
     os.system("npm run serve")
 except:
     running = False

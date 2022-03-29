@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import area from '@/assets/area.json'
+import area from '@/data/area.json'
 
 export default {
   name: 'SelectBar',
