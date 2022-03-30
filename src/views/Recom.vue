@@ -1,20 +1,36 @@
 <template>
   <el-container>
     <div class="title">Daily Recommendations</div>
+    <br>
     <el-main>
-      <hotel-list></hotel-list>
+      <hotel-block :hotelData="hotelRecomList" />
     </el-main>
     <el-footer></el-footer>
   </el-container>
 </template>
 
 <script>
+import hotelList from '@/data/recommendation.json'
 import { ElContainer, ElMain, ElFooter } from 'element-plus'
-import HotelList from '@/components/hotelList/HotelList'
+import HotelBlock from '@/components/hotelList/HotelBlock'
 export default {
   name: "Recom",
   components: {
-    ElContainer, ElMain, ElFooter, HotelList
+    ElContainer, ElMain, ElFooter, HotelBlock
+  },
+  data() {
+    return {
+      hotelRecomList: []
+    }
+  },
+  created() {
+    this.hotelRecomList = [];
+    for (let item of hotelList) {
+      if (item.risk_level === "Low") {
+        item.price = "S$ " + item.price;
+        this.hotelRecomList.push(item);
+      }
+    }
   }
 }
 </script>

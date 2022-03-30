@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from '@/views/Home.vue'
 import Filter from '@/views/Filter.vue'
 import Recom from '@/views/Recom.vue'
+import SearchResult from '@/views/SearchResult.vue'
 
 const routes = [
   {
@@ -22,11 +23,16 @@ const routes = [
     path: "/dailyRecommendations",
     name: "recommendation",
     component: Recom
+  },
+  {
+    path: "/searchresult",
+    name: "searchresult",
+    component: SearchResult
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(), 
+  history: createWebHistory(),
   routes
 })
 

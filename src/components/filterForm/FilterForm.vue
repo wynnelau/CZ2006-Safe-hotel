@@ -45,7 +45,8 @@ export default {
     return {
       selected: null,
       highPrice: null,
-      lowPrice: null
+      lowPrice: null,
+      res_hotel: []
     }
   },
   methods: {
@@ -55,13 +56,18 @@ export default {
         highPrice: this.highPrice,
         lowPrice: this.lowPrice
       }).then(res => {
-        console.log(res);
+        this.res_hotel = res;
+        this.$store.commit('setHotels', this.res_hotel);
+        this.changeRoute();
       }).catch(err => {
         console.log(err);
       })
     },
     selectedVal(childVal) {
       this.selected = childVal;
+    },
+    changeRoute() {
+      this.$router.push("/searchresult");
     }
   }
 }

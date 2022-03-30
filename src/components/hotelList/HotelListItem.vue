@@ -17,7 +17,7 @@
           <img src="@/assets/img/star.svg" alt="" style="width: 1em; height: 1em; margin-right: 5px;">
           <div>{{hotel.review}}</div>
         </div>
-        <div>
+        <div :style="{ color: riskColor }">
           Risk Level: {{hotel.risk_level}}
         </div>
       </div>
@@ -46,6 +46,25 @@ export default {
   methods: {
     link() {
       window.open(this.hotel.url, '_blank');
+    }
+  },
+  computed: {
+    riskColor() {
+      if (this.hotel.risk_level === "Low") {
+        return '#91AD70';
+      }
+      else if (this.hotel.risk_level === "Medium Low") {
+        return '#6699A1';
+      }
+      else if (this.hotel.risk_level === "Medium") {
+        return '#C18A26';
+      }
+      else if (this.hotel.risk_level === "Medium High") {
+        return '#E98B2A';
+      }
+      else {
+        return '#E83015';
+      }
     }
   }
 }
