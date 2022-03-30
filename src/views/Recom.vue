@@ -26,7 +26,9 @@ export default {
   created() {
     this.hotelRecomList = [];
     for (let item of hotelList) {
-      item.price = "S$ " + item.price;
+      if (item.price[0] != "S") {
+        item.price = "S$ " + item.price;
+      }
       this.hotelRecomList.push(item);
     }
   }
