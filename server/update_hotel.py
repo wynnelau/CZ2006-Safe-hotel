@@ -1,4 +1,3 @@
-from matplotlib.pyplot import hot
 from selectorlib import Extractor
 import requests 
 from time import sleep
@@ -77,11 +76,13 @@ def fetch_hotel_data():
         ]
         writer = csv.DictWriter(outfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
-        for i in range(0, 250, 26):
+        for i in range(0, 10000, 26):
             data = scrape(url + "&offset=" + str(i))
-            if data:
+            if data['hotels']:
                 for h in data['hotels']:
                     writer.writerow(h)
+            else:
+                break
 
 def convert_to_json():
     fields_name = ["name", "image", "price", "location", "review", "url"]
