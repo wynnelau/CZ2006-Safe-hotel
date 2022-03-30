@@ -2,11 +2,12 @@ from flask import Flask, request, jsonify
 from flask_cors import cross_origin
 from server.utils import *
 import json
+import socket
 
 app = Flask(__name__)
 
 @app.route('/filter', methods=['POST', 'GET'])
-@cross_origin(origin='http://localhost:8080',headers=['Content-Type'])
+@cross_origin(origin='http://119.8.160.160:8080' ,headers=['Content-Type'])
 def filter():
     print("Receive POST/GET messages!")
     area = request.json['area']
@@ -21,7 +22,7 @@ def filter():
     response = []
     
     for item in hotel_data:
-        if item['location'] == area and item['price'] >= lowPrice and item['price'] <= highPrice:
+        if (area is None or item['location'] == area) and (lowPrice is None or item['price'] >= lowPrice) and (highPrice is None or item['price'] <= highPrice):
             response.append(item)
     
     print("Target:", response)
