@@ -75,12 +75,13 @@ def fetch_hotel_data():
             "review",
             "url",
         ]
-        writer = csv.DictWriter(outfile, fieldnames=fieldnames,quoting=csv.QUOTE_ALL)
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
-        data = scrape(url)
-        if data:
-            for h in data['hotels']:
-                writer.writerow(h)
+        for i in range(0, 250, 26):
+            data = scrape(url + "&offset=" + str(i))
+            if data:
+                for h in data['hotels']:
+                    writer.writerow(h)
 
 def convert_to_json():
     fields_name = ["name", "image", "price", "location", "review", "url"]
@@ -116,7 +117,7 @@ def generate_daily_recommendations_and_standardize_data():
             covid_risk = "High"
         for item in hotel_data:
             location = item["location"].strip(", Singapore").upper()
-            price = int(item["price"].strip("$S "))
+            price = int(item["price"].strip("$S ").replace(',', ''))
             if region == location:
                 hotel_list_with_risk_level.append(dict(item))
                 hotel_list_with_risk_level[len(hotel_list_with_risk_level) - 1]["location"] = location
