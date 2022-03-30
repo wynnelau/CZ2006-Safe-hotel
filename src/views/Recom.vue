@@ -26,10 +26,8 @@ export default {
   created() {
     this.hotelRecomList = [];
     for (let item of hotelList) {
-      if (item.risk_level === "Low") {
-        item.price = "S$ " + item.price;
-        this.hotelRecomList.push(item);
-      }
+      item.price = "S$ " + item.price;
+      this.hotelRecomList.push(item);
     }
   }
 }

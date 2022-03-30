@@ -24,7 +24,11 @@ export default {
     }
   },
   created() {
-    this.hotelData = this.$store.state.hotels;
+    this.hotelData = [];
+    for (let item of this.$store.state.hotels) {
+      item.price = "S$ " + item.price;
+      this.hotelData.push(item);
+    }
   }
 }
 </script>
