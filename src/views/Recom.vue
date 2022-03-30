@@ -26,10 +26,10 @@ export default {
   created() {
     this.hotelRecomList = [];
     for (let item of hotelList) {
-      if (item.risk_level === "Low") {
+      if (item.price[0] != "S") {
         item.price = "S$ " + item.price;
-        this.hotelRecomList.push(item);
       }
+      this.hotelRecomList.push(item);
     }
   }
 }
