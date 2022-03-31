@@ -42,7 +42,7 @@ def get_url():
     else:
         next_day += 1
         
-    return "https://www.booking.com/searchresults.en-gb.html?label=singapore-WzGdqcC1K4*NWFxkuYSqNAS380872793965%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atiaud-297601666555%3Akwd-307297810028%3Alp9062546%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YfpWGnRw6lOGgfEoJVv7zYo&sid=aaf90ef021878f54ad97898b3e923abf&aid=1610687&lang=en-gb&sb_lp=1&src=index&error_url=https%3A%2F%2Fwww.booking.com%2Findex.en-gb.html%3Faid%3D1610687%3Blabel%3Dsingapore-WzGdqcC1K4%252ANWFxkuYSqNAS380872793965%253Apl%253Ata%253Ap1%253Ap2%253Aac%253Aap%253Aneg%253Afi%253Atiaud-297601666555%253Akwd-307297810028%253Alp9062546%253Ali%253Adec%253Adm%253Appccp%253DUmFuZG9tSVYkc2RlIyh9YfpWGnRw6lOGgfEoJVv7zYo%3Bsid%3Daaf90ef021878f54ad97898b3e923abf%3Bsb_price_type%3Dtotal%3Bsrpvid%3Dfb8958792a44012a%26%3B&ss=Singapore&is_ski_area=0&ssne=Singapore&ssne_untouched=Singapore&dest_id=-73635&dest_type=city&" + \
+    return "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1DCAMoggI46AdIM1gEaMkBiAEBmAEJuAEXyAEM2AED6AEB-AECiAIBqAIDuALcu5WSBsACAdICJDJiNDk2ZmI0LWVjMGUtNDU5MS1iMzM0LTc1Mjk4Mzg4MTgwOdgCBOACAQ;sid=0737c5e24a4d094304ae8d9a75c98c33;city=-73635&" + \
         "checkin_year=" + str(current_year) + "&checkin_month=" + str(current_month) + "&checkin_monthday=" + str(current_day) + \
         "&checkout_year=" + str(next_year) + "&checkout_month=" + str(next_month) + "&checkout_monthday=" + str(next_day)
 
@@ -76,7 +76,7 @@ def fetch_hotel_data():
         ]
         writer = csv.DictWriter(outfile, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
         writer.writeheader()
-        for i in range(0, 10000, 26):
+        for i in range(0, 10000, 25):
             data = scrape(url + "&offset=" + str(i))
             if data['hotels']:
                 for h in data['hotels']:
@@ -98,10 +98,18 @@ def generate_daily_recommendations_and_standardize_data():
     hotel_data = None
     with open(hotel_data_json, 'r', encoding='utf-8') as f:
         hotel_data = json.load(f)
+    for item in hotel_data:
+        item["price"] = int(item["price"].strip("$S ").replace(',', ''))
+    hotel_data = sorted(hotel_data, key=lambda x: x["price"])
+    i = 1
+    while i < len(hotel_data):
+        if hotel_data[i]["name"] == hotel_data[i - 1]["name"]:
+            hotel_data.pop(i)
+            i -= 1
+        i += 1
     covid_data = covid_data["sz"]["aggregatedObj"]
     covid_data = sorted(covid_data.items(), key=lambda x: x[1])
     hotel_list_with_risk_level = []
-    truncate_point = -1
     for i in range(len(covid_data)):
         region = covid_data[i][0]
         covid_num = covid_data[i][1]
@@ -117,17 +125,33 @@ def generate_daily_recommendations_and_standardize_data():
         else:
             covid_risk = "High"
         for item in hotel_data:
-            location = item["location"].strip(", Singapore").upper()
-            price = int(item["price"].strip("$S ").replace(',', ''))
+            location = item["location"].replace(", Singapore", "").upper()
+            if location in region_map:
+                location = region_map[location]
+            if item["review"] == "":
+                item["review"] = 10
+            review = float(item["review"])
             if region == location:
                 hotel_list_with_risk_level.append(dict(item))
                 hotel_list_with_risk_level[len(hotel_list_with_risk_level) - 1]["location"] = location
-                hotel_list_with_risk_level[len(hotel_list_with_risk_level) - 1]["price"] = price
                 hotel_list_with_risk_level[len(hotel_list_with_risk_level) - 1]["risk_level"] = covid_risk
-        if i >= 5 and len(hotel_list_with_risk_level) >= 10 and truncate_point == -1:
-            truncate_point = len(hotel_list_with_risk_level)
+                hotel_list_with_risk_level[len(hotel_list_with_risk_level) - 1]["review"] = review
+    hotel_list_recommendation = []
+    last = 0
+    for i in range(len(hotel_list_with_risk_level)):
+        flag = False
+        for j in range(last, i):
+            if hotel_list_with_risk_level[i]["review"] <= hotel_list_with_risk_level[j]["review"]:
+                flag = True
+                break
+        if i > 0 and hotel_list_with_risk_level[i]["risk_level"] != hotel_list_with_risk_level[i - 1]["risk_level"] and len(hotel_list_recommendation) >= 10:
+            break
+        if not flag:
+            hotel_list_recommendation.append(hotel_list_with_risk_level[i])
+        if i < len(hotel_list_with_risk_level) - 1 and hotel_list_with_risk_level[i]["location"] != hotel_list_with_risk_level[i + 1]["location"]:
+            last = i + 1
     with open(daily_recommendation_json, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(hotel_list_with_risk_level[0:truncate_point], ensure_ascii=False))
+        f.write(json.dumps(hotel_list_recommendation, ensure_ascii=False))
     with open(hotel_data_json, 'w', encoding='utf-8') as f:
         f.write(json.dumps(hotel_list_with_risk_level, ensure_ascii=False))
 
@@ -142,8 +166,7 @@ def generate_areas():
     for area in area_data:
         occurred = False
         for item in hotel_data:
-            location = item["location"].strip(", Singapore").upper()
-            if location == area:
+            if item["location"] == area:
                 occurred = True
                 break
         if occurred:
@@ -154,7 +177,7 @@ def generate_areas():
 def main():
     fetch_hotel_data()
     convert_to_json()
-    generate_areas()
     generate_daily_recommendations_and_standardize_data()
+    generate_areas()
     
 main()
