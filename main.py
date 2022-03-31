@@ -17,7 +17,7 @@ def periodically_update_data():
             update_hotel.main()
 
 def run_flask():
-    app.run(debug=False)
+    app.run(host='0.0.0.0', debug=False)
 
 def run_vue():
     os.system("npm run serve")
