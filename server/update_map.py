@@ -33,7 +33,7 @@ def generate_image(features, svg_contents):
         while not svg_contents[index].startswith("</g"):
             sentence = svg_contents[index].split("path")
             index += 1
-            map_image_contents.append(sentence[0] + 'path fill="rgb(255, ' + str(255 - min(ordered_regions[region], 255)) + ", " + str(255 - min(ordered_regions[region], 255)) + ')" ' + sentence[1])
+            map_image_contents.append(sentence[0] + 'path fill="rgb(255, ' + str(255 - min(ordered_regions[region] // 2, 255)) + ", " + str(255 - min(ordered_regions[region] // 2, 255)) + ')" ' + sentence[1])
         map_image_contents.append(svg_contents[index])
         index += 1
     map_image_file = open(map_output_url, "w")

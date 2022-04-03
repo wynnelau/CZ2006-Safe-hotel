@@ -144,7 +144,7 @@ def generate_daily_recommendations_and_standardize_data():
             if hotel_list_with_risk_level[i]["review"] <= hotel_list_with_risk_level[j]["review"]:
                 flag = True
                 break
-        if i > 0 and hotel_list_with_risk_level[i]["risk_level"] != hotel_list_with_risk_level[i - 1]["risk_level"] and len(hotel_list_recommendation) >= 10:
+        if i > 0 and hotel_list_with_risk_level[i]["risk_level"] != hotel_list_with_risk_level[0]["risk_level"] and len(hotel_list_recommendation) >= 10:
             break
         if not flag:
             hotel_list_recommendation.append(hotel_list_with_risk_level[i])
