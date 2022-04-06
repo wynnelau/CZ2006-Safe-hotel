@@ -13,7 +13,6 @@ def filter():
     area = request.json['area']
     highPrice = request.json['highPrice']
     lowPrice = request.json['lowPrice']
-    print("Area:", area, "Upper bound:", highPrice, "Lower bound:", lowPrice)
 
     hotel_data = None
     with open(hotel_data_json, 'r', encoding='utf-8') as f:
@@ -24,8 +23,6 @@ def filter():
     for item in hotel_data:
         if (area is None or item['location'] == area) and (lowPrice is None or item['price'] >= lowPrice) and (highPrice is None or item['price'] <= highPrice):
             response.append(item)
-    
-    print("Target:", response)
     
     response = jsonify(response)
 

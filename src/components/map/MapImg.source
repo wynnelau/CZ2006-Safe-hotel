@@ -28,7 +28,7 @@ export default {
           pathObj.onclick = function(event) {
             const location = event.target.parentNode.id;
             const url = "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1DCBkoggI46AdIM1gEaMkBiAEBmAEJuAEXyAEM2AED6AEB-AECiAIBqAIDuALzouSQBsACAdICJDJiMTEwY2VkLWZhYTItNGE0MC1hMjNiLTM4NzYyMDhhMTQ4ZtgCBOACAQ;sid=384c498d2529a1851b6ef193f33c8cc6&ss=";
-            window.open(url + location, '_blank');
+            window.open(url + location + ', Singapore', '_blank');
           }
         }
         else {
