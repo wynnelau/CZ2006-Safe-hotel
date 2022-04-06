@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { postFilterForm } from '@/network/filter.js'
 import { ElContainer, ElMain, ElFooter } from 'element-plus'
 import HotelList from '@/components/hotelList/HotelList'
 
@@ -24,13 +25,26 @@ export default {
     }
   },
   created() {
+    let filter = this.$route.query;
+    filter.highPrice = parseInt(filter.highPrice);
+    filter.lowPrice = parseInt(filter.lowPrice);
     this.hotelData = [];
-    for (let item of this.$store.state.hotels) {
-      if (item.price[0] != "S") {
-        item.price = "S$ " + item.price;
+    postFilterForm(filter).then(res => {
+      this.hotelData = res;
+      for (let item of this.hotelData) {
+        if (item.price[0] != "S") {
+          item.price = "S$ " + item.price;
+        }
       }
-      this.hotelData.push(item);
-    }
+    }).catch(err => {
+      console.log(err);
+    });
+    // for (let item of this.$store.state.hotels) {
+    //   if (item.price[0] != "S") {
+    //     item.price = "S$ " + item.price;
+    //   }
+    //   this.hotelData.push(item);
+    // }
   }
 }
 </script>
@@ -39,5 +53,11 @@ export default {
 .title {
   margin: 20px auto;
   font-size: xx-large;
+}
+/* iphone6 7 8 plus */
+@media screen and (max-width: 414px) {
+.title {
+  font-size: 28px;
+}
 }
 </style>

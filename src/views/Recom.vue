@@ -47,4 +47,10 @@ export default {
   margin: 20px auto;
   font-size: xx-large;
 }
+/* iphone6 7 8 plus */
+@media screen and (max-width: 414px) {
+.title {
+  font-size: 28px;
+}
+}
 </style>

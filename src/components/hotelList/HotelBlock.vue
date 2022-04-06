@@ -1,8 +1,6 @@
 <template>
   <div class="hotel-block">
-    <div v-for="item in hotels" :key="item.name">
-      <hotel-block-item :hotel="item" />
-    </div>
+    <hotel-block-item v-for="item in hotels" :key="item.name" :hotel="item" />
   </div>
 </template>
 
@@ -32,14 +30,15 @@ export default {
 
 <style scoped>
 .hotel-block {
-  margin: 20px auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 350px);
+  width: 90%;
+  margin: auto;
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fill, 500px);
   row-gap: 30px;
-  column-gap: 40px;
-  justify-content: center;
-  /* display: flex;
+  column-gap: 40px; */
+  justify-content: flex-start;
+  display: flex;
   flex-direction: row;
-  flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 </style>

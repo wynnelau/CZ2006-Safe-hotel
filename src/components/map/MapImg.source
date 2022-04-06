@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" id="inform"></div>
+    <div id="inform">SINGAPORE MAP</div>
     <svg @mouseenter="loadMap" class="map" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" viewBox="0 0 800 518" fill="white" stroke="black" stroke-linecap="round" stroke-linejoin="round">
     </svg>
   </div>
@@ -42,10 +42,11 @@ export default {
 
 <style scoped>
   #inform {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 20px;
+    position: relative;
+    text-align: left;
+    margin: 10Px 20Px;
+    font-size: 1.2em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
   .map {
     margin-top: 40px;

@@ -39,9 +39,29 @@ export default {
 
 <style scoped>
 .select-bar {
-  width: 320px;
-  height: 50px;
+  width: 380px;
+  height: 80px;
   padding: 0 25px;
   box-sizing: border-box;
+}
+
+/* ipad */
+@media screen and (max-width: 768px) {
+  .select-bar {
+    width: 230px;
+    height: 60px;
+    padding: 0 25px;
+    box-sizing: border-box;
+  }
+}
+
+/* iphone6 7 8 plus */
+@media screen and (max-width: 414px) {
+  .select-bar {
+    width: 180px;
+    height: 50px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
 }
 </style>

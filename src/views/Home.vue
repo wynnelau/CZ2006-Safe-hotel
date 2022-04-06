@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script> 
+<script>
 import { ElButton, ElFooter, ElMain, ElRow } from 'element-plus'
 import MapImg from '@/components/map/MapImg.vue'
 
@@ -38,13 +38,15 @@ export default {
     height: 60px;
   }
   .button {
-    height: 40px;
-    width: 300px;
-    margin: 1%;
-    border-radius: 10px;
+    min-height: 60px;
+    min-width: 320px;
+    margin: 0 20px;
+    padding: 5Px 10Px;
+    border-radius: 8Px;
     border-style: hidden;
     background-color: #FCAC91;
     color: white;
+    font-size: 1.1em;
     -webkit-transition-duration: 0.3s; /* Safari */
     transition-duration: 0.3s;
   }
@@ -54,4 +56,21 @@ export default {
     color: black;
     cursor: pointer;
   }
+
+/* iphone6 7 8 plus */
+@media screen and (max-width: 414px) {
+  .button {
+    height: 30px;
+    min-width: 130px;
+    margin: 0 10px;
+    padding: 2Px 5Px;
+    border-radius: 8Px;
+    border-style: hidden;
+    background-color: #FCAC91;
+    color: white;
+    font-size: 15px;
+    -webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
+  }
+}
 </style>
