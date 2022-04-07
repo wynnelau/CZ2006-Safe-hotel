@@ -10,6 +10,9 @@
 import calcAggOutput from './calcAggOutput.js'
 export default {
   name: "MapImg",
+  mounted() {
+    this.$emit('has-mounted');
+  },
   methods: {
     loadMap() {
       for (let region in calcAggOutput["sz"]["aggregatedObj"]) {

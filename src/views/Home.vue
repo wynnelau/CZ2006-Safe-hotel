@@ -1,7 +1,8 @@
 <template>
   <div>
+    <preloading v-if="isloading" />
     <el-main>
-      <map-img />
+      <map-img @has-mounted="mapLoad" />
       <br />
       <br />
       <el-row class="mb-4">
@@ -16,13 +17,22 @@
 <script>
 import { ElButton, ElFooter, ElMain, ElRow } from 'element-plus'
 import MapImg from '@/components/map/MapImg.vue'
+import Preloading from '@/components/preloading/Preloading'
 
 export default {
   name: "Home",
   components: {
-    MapImg, ElButton, ElFooter, ElMain, ElRow
+    MapImg, ElButton, ElFooter, ElMain, ElRow, Preloading
+  },
+  data() {
+    return {
+      isloading: true
+    }
   },
   methods: {
+    mapLoad() {
+      this.isloading = false;
+    },
     filter() {
       this.$router.push("/search");
     },
