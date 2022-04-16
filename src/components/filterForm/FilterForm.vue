@@ -34,7 +34,7 @@
       <el-col class="label-container"></el-col>
       <div v-if="warningl" class="warning">Please type in the correct number format.</div>
       <div v-else class="warning"></div>
-      <div v-if="warninghl" class="warning">Higher Bound should > Lower Bound</div>
+      <div v-if="warninghl" class="warning">Higher Bound should be not less than Lower Bound</div>
     </el-row>
     <el-button class="button" @click="search">Search</el-button>
   </el-card>
@@ -105,7 +105,7 @@ export default {
         return false;
       }
 
-      if (this.highPrice < this.lowPrice) {
+      if (this.highPrice != null && this.highPrice < this.lowPrice) {
         this.warninghl = true;
         return false;
       }

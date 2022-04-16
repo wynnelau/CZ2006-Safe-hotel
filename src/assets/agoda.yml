@@ -1,0 +1,26 @@
+hotels:
+    css: div.Gridstyled__GridStyled-sc-dfh2k0-0.kEJDDi.PropertyCard__Container
+    xpath: null
+    multiple: true
+    type: Text
+    children:
+        name:
+            css: h3.PropertyCard__HotelName
+            xpath: null
+            type: Text
+        price:
+            css: span.PropertyCardPrice__Value
+            xpath: null
+            type: Text
+        image:
+            css: img.HeroImage.HeroImage--s
+            xpath: null
+            type: Image
+        location:
+            css: span.Address__Text
+            xpath: null
+            type: Text
+        review:
+            css: 'div.Gridstyled__GridStyled-sc-dfh2k0-0 div.Box-sc-kv6pi1-0 div.Box-sc-kv6pi1-0 div.Box-sc-kv6pi1-0 div.Box-sc-kv6pi1-0 p.Typographystyled__TypographyStyled-sc-j18mtu-0'
+            xpath: null
+            type: Text
