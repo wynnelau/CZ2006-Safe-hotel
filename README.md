@@ -1,4 +1,5 @@
-# safe-hotel
+# CZ2006-SafeHotel
+
 Group project done in Year 2 Sem 1
 
 • Drafted the Software Requirements Specification (SRS), which includes the use case description and the sequence diagram, to better show how the system works to both users and developers.  
