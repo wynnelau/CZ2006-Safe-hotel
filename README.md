@@ -5,6 +5,8 @@ Group project done in Year 2 Sem 1
 • Drafted the Software Requirements Specification (SRS), which includes the use case description and the sequence diagram, to better show how the system works to both users and developers.  
 • Extracted information of required hotels by scraping a hotel booking website using Python and SelectorLib to ensure that users have access to updated prices of hotel rooms.
 
+Video link: https://youtu.be/9vsL41EcaMU
+
 ## Prerequisite
 ```
 npm >= 8.1.2
